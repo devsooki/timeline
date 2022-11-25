@@ -1,10 +1,11 @@
+import Header from 'components/Header';
 import React from 'react';
 import styled from 'styled-components';
 
 const TimeLine = () => {
   return (
     <Container>
-      
+      <Header />
     </Container>
   )
 }
