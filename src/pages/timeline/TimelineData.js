@@ -3,22 +3,14 @@ import styled from 'styled-components';
 
 const TimelineData = () => {
   const timeArray = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-  const [timeDataArray, setTimeDataArray] = useState(['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''])
-  const onChange = (e, index) => {
-    const {
-      target: { value }
-    } = e
-  }
+  
   return (
     <>
       {
         timeArray.map((time, index) => (
           <Container key={index}>
             <TimeContent>{time}시</TimeContent>
-            <Input 
-              value={timeDataArray[index]}
-              onChange={(e, index) => onChange(e, index)}
-            />
+            <Input />
             <Button>등록</Button>
           </Container>
         ))
