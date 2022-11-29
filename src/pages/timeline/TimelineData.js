@@ -1,16 +1,27 @@
+import useTimes from 'hooks/useTimes';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const TimelineData = () => {
-  const timeArray = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-  
+
+  const timesList = useTimes(8, 24)
+
+  // TODO
+  // custom hook - useTime
+  // 인자로 start, end 값 넣어서 times를 반환해서 그거를 사용하도록
+  // const {times, merge} = useTime({start: 8, end:24 })
+  // times -> 8,9,10,11,{tiem: 12, parent: 11},13
+  // merge(9, 11)
+  // split
+  // times -> 8,9,9,9,12,13
+  // times -> rendering 8,9,9,9,12,13
   return (
     <>
       {
-        timeArray.map((time, index) => (
+        timesList.map((time, index,arr ) => (
           <Container key={index}>
             <TimeContent>{time}시</TimeContent>
-            <Input />
+            
             <Button>등록</Button>
           </Container>
         ))
