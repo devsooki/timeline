@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const TimelineData = () => {
-
-  const timesList = useTimes(8, 24)
-
   // TODO
   // custom hook - useTime
   // 인자로 start, end 값 넣어서 times를 반환해서 그거를 사용하도록
@@ -15,6 +12,10 @@ const TimelineData = () => {
   // split
   // times -> 8,9,9,9,12,13
   // times -> rendering 8,9,9,9,12,13
+  const timesList = useTimes(8, 23);
+  const [start, setStart] = useState(1);
+  const [end, setEnd] = useState(24);
+
   return (
     <>
       {
