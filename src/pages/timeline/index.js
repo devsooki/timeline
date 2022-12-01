@@ -8,14 +8,14 @@ const TimeLine = () => {
   const [isTime, setIsTime] = useState(true)
 
   const onClickTimeModal = () => {
-    //setIsTime(!isTime)
+    setIsTime(!isTime)
   }
   return (
     <Container>
       <Header />
       <TimelineData />
       {
-        isTime && <TimeModal onClickClose={onClickTimeModal} />
+        isTime && <TimeModal onClickTimeModal={onClickTimeModal} />
       }
     </Container>
   )

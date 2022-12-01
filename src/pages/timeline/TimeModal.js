@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const TimeModal = ({ ...props }) => {
   const {
     onClickTimeModal
   } = props
+
+  const [startTime, setStartTime] = useState(1)
+  const [endTime, setEndTime] = useState(24)
+
+  const onChange = (e, type) => {
+    const {
+      target: { value }
+    } = e
+    let numberValue = value.replace(/[^0-9]/g, '')
+
+    if (numberValue > 24) {
+      numberValue = numberValue % 24
+    }
+
+    if (type === 'start') {
+      setStartTime(numberValue)
+    } else if (type === 'end') {
+      setEndTime(numberValue)
+    }
+  }
+
+  const onClickSaveTime = () => {
+    localStorage.setItem(
+      'time',
+      JSON.stringify({
+        startTime: startTime, 
+        endTime: endTime
+      })
+    )
+
+    onClickTimeModal()
+  }
 
   return (
     <Container>
@@ -22,13 +54,21 @@ const TimeModal = ({ ...props }) => {
         <Content>
           <InputContent>
             <b>⏰ 시작 시간</b>
-            <input />
+            <Input 
+              value={startTime}
+              onChange={e => onChange(e, 'start')}
+              maxLength={2}
+            />
           </InputContent>
           <InputContent>
             <b>⏰ 마무리 시간</b>
-            <input />
+            <Input 
+              value={endTime}
+              onChange={e => onChange(e, 'end')}
+              maxLength={2}
+            />
           </InputContent>
-          <Button>
+          <Button onClick={onClickSaveTime}>
             등록하기
           </Button>
         </Content>
@@ -85,10 +125,11 @@ const InputContent = styled.div`
     width: 100px;
     font-size: 14px;
   }
-  input {
-    flex: 1;
-    padding: 5px;
-  }
+`
+const Input = styled.input`
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ddd;
 `
 const Button = styled.button`
   width: 100%;
