@@ -1,8 +1,8 @@
 import useTimes from 'hooks/useTimes';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const TimelineData = () => {
+const TimelineData = ({ ...props }) => {
   // TODO
   // custom hook - useTime
   // 인자로 start, end 값 넣어서 times를 반환해서 그거를 사용하도록
@@ -12,14 +12,23 @@ const TimelineData = () => {
   // split
   // times -> 8,9,9,9,12,13
   // times -> rendering 8,9,9,9,12,13
-  const timesList = useTimes(8, 23);
+  const {
+    time
+  } = props
   const [start, setStart] = useState(1);
   const [end, setEnd] = useState(24);
+  const timesList = useTimes(start, end);
 
+  useEffect(() => {
+    if (time !== null) {
+      setStart(time.startTime)
+      setEnd(time.endTime)
+    }
+  }, [time])
   return (
     <>
       {
-        timesList.map((time, index,arr ) => (
+        useTimes(start, end).map((time, index,arr ) => (
           <Container key={index}>
             <TimeContent>{time}시</TimeContent>
             

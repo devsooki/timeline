@@ -1,11 +1,22 @@
 import Header from 'components/Header';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { loadLocalStorage } from 'utils/localStorage';
 import TimelineData from './TimelineData';
 import TimeModal from './TimeModal';
 
 const TimeLine = () => {
   const [isTime, setIsTime] = useState(true)
+  const [time, setTime] = useState(loadLocalStorage('time'));
+
+  useEffect(() => {
+    if (time === null) {
+      setIsTime(true)
+    } else {
+      setIsTime(false)
+    }
+  }, [time])
+
 
   const onClickTimeModal = () => {
     setIsTime(!isTime)
@@ -13,7 +24,9 @@ const TimeLine = () => {
   return (
     <Container>
       <Header />
-      <TimelineData />
+      <TimelineData 
+        time={time}
+      />
       {
         isTime && <TimeModal onClickTimeModal={onClickTimeModal} />
       }
